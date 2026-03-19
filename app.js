@@ -3,6 +3,9 @@ const express = require("express");
 
 const app = express();
 
+// To use middleware -> which help in getting the request.body object inside the callback function.
+app.use(express.json());
+
 // app.get("/", (request, response) => {
 //   response
 //     .status(200)
@@ -25,6 +28,26 @@ app.get("/api/v1/tours", (request, response) => {
       tours,
     },
   });
+});
+
+app.post("/api/v1/tours", (request, response) => {
+  const newId = tours[tours.length - 1].id + 1;
+  const newTour = Object.assign({ id: newId }, request.body);
+
+  tours.push(newTour);
+
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(tours),
+    (error) => {
+      response.status(201).json({
+        status: "success",
+        data: {
+          tours: newTour,
+        },
+      });
+    },
+  );
 });
 
 const port = 3000;
