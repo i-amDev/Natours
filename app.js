@@ -52,13 +52,19 @@ app.post("/api/v1/tours", (request, response) => {
 
 app.get("/api/v1/tours/:id", (request, response) => {
   const id = request.params.id * 1;
-  if (id > tours.length) {
+  const tour = tours.find((element) => element.id === id);
+  //   if (id > tours.length) {
+  //     return response.status(404).json({
+  //       status: "Fail",
+  //       message: "Invalid ID",
+  //     });
+  //   }
+  if (!tour) {
     return response.status(404).json({
       status: "Fail",
       message: "Invalid ID",
     });
   }
-  const tour = tours.find((element) => element.id === id);
   response.status(200).json({
     status: "success",
     data: {
