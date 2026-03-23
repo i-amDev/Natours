@@ -15,6 +15,16 @@ exports.checkID = (request, response, next, value) => {
   next();
 };
 
+exports.checkBody = (request, response, next) => {
+  if (!request.body.name || !request.body.price) {
+    return response.status(400).json({
+      status: "Fail",
+      message: "Missing name or price",
+    });
+  }
+  next();
+};
+
 // Route Handlers
 exports.getAllTours = (request, response) => {
   console.log(request.requestTime);
