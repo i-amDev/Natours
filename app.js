@@ -1,7 +1,10 @@
 const fs = require("fs");
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
+
+app.use(morgan("dev"));
 
 // To use middleware -> which help in getting the request.body object inside the callback function.
 app.use(express.json());
