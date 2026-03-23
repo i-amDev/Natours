@@ -111,6 +111,16 @@ app.patch("/api/v1/tours/:id", updateTour);
 
 app.delete("/api/v1/tours/:id", deleteTour);
 
+// Another way of writing these five endpoints
+
+// app.route("/api/v1/tours").get(getAllTours).post(createTour);
+
+// app
+//   .route("/api/v1/tours/:id")
+//   .get(getTourById)
+//   .patch(updateTour)
+//   .delete(deleteTour);
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`App running on port ${port}.....`);
