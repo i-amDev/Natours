@@ -88,15 +88,7 @@ const updateTour = (request, response) => {
   });
 };
 
-app.get("/api/v1/tours", getAllTours);
-
-app.post("/api/v1/tours", createTour);
-
-app.get("/api/v1/tours/:id", getTourById);
-
-app.patch("/api/v1/tours/:id", updateTour);
-
-app.delete("/api/v1/tours/:id", (request, response) => {
+const deleteTour = (request, response) => {
   if (request.params.id * 1 > tours.length) {
     return response.status(404).json({
       status: "Fail",
@@ -107,7 +99,17 @@ app.delete("/api/v1/tours/:id", (request, response) => {
     status: "Success",
     data: null,
   });
-});
+};
+
+app.get("/api/v1/tours", getAllTours);
+
+app.post("/api/v1/tours", createTour);
+
+app.get("/api/v1/tours/:id", getTourById);
+
+app.patch("/api/v1/tours/:id", updateTour);
+
+app.delete("/api/v1/tours/:id", deleteTour);
 
 const port = 3000;
 app.listen(port, () => {
