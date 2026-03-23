@@ -20,7 +20,7 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`),
 );
 
-app.get("/api/v1/tours", (request, response) => {
+const getAllTours = (request, response) => {
   response.status(200).json({
     status: "success",
     results: tours.length,
@@ -28,7 +28,9 @@ app.get("/api/v1/tours", (request, response) => {
       tours,
     },
   });
-});
+};
+
+app.get("/api/v1/tours", getAllTours);
 
 app.post("/api/v1/tours", (request, response) => {
   const newId = tours[tours.length - 1].id + 1;
