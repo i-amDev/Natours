@@ -11,6 +11,8 @@ app.use(morgan("dev"));
 // To use middleware -> which help in getting the request.body object inside the callback function.
 app.use(express.json());
 
+app.use(express.static(`${__dirname}/public`));
+
 app.use((request, response, next) => {
   console.log("Hello from the middleware! 👋🏻");
   next();
