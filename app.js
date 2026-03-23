@@ -30,9 +30,7 @@ const getAllTours = (request, response) => {
   });
 };
 
-app.get("/api/v1/tours", getAllTours);
-
-app.post("/api/v1/tours", (request, response) => {
+const createTour = (request, response) => {
   const newId = tours[tours.length - 1].id + 1;
   const newTour = Object.assign({ id: newId }, request.body);
 
@@ -50,7 +48,11 @@ app.post("/api/v1/tours", (request, response) => {
       });
     },
   );
-});
+};
+
+app.get("/api/v1/tours", getAllTours);
+
+app.post("/api/v1/tours", createTour);
 
 app.get("/api/v1/tours/:id", (request, response) => {
   const id = request.params.id * 1;
