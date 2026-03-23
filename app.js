@@ -10,7 +10,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use((request, response, next) => {
-  console.log("Hello from the middleware!👋🏻");
+  console.log("Hello from the middleware! 👋🏻");
   next();
 });
 
@@ -152,15 +152,20 @@ const deleteUser = (request, response) => {
 };
 
 // Routes
-app.get("/api/v1/tours", getAllTours);
 
-app.post("/api/v1/tours", createTour);
+const tourRouter = express.Router();
 
-app.get("/api/v1/tours/:id", getTourById);
+app.use("/api/v1/tours", tourRouter);
 
-app.patch("/api/v1/tours/:id", updateTour);
+tourRouter.get("/", getAllTours);
 
-app.delete("/api/v1/tours/:id", deleteTour);
+tourRouter.post("/", createTour);
+
+tourRouter.get("/:id", getTourById);
+
+tourRouter.patch("/:id", updateTour);
+
+tourRouter.delete("/:id", deleteTour);
 
 // Another way of writing these five endpoints
 
@@ -172,13 +177,13 @@ app.delete("/api/v1/tours/:id", deleteTour);
 //   .patch(updateTour)
 //   .delete(deleteTour);
 
-app.route("/api/v1/users").get(getAllUsers).post(createUser);
+const userRouter = express.Router();
 
-app
-  .route("/api/v1/users/:id")
-  .get(getUserById)
-  .patch(updateUser)
-  .delete(deleteUser);
+app.use("/api/v1/users", userRouter);
+
+userRouter.route("/").get(getAllUsers).post(createUser);
+
+userRouter.route("/:id").get(getUserById).patch(updateUser).delete(deleteUser);
 
 const port = 3000;
 app.listen(port, () => {
