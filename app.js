@@ -33,6 +33,7 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`),
 );
 
+// Route Handlers
 const getAllTours = (request, response) => {
   console.log(request.requestTime);
   response.status(200).json({
@@ -115,6 +116,42 @@ const deleteTour = (request, response) => {
   });
 };
 
+const getAllUsers = (request, response) => {
+  response.status(500).json({
+    status: "Error",
+    message: "This route is not yet defined",
+  });
+};
+
+const createUser = (request, response) => {
+  response.status(500).json({
+    status: "Error",
+    message: "This route is not yet defined",
+  });
+};
+
+const getUserById = (request, response) => {
+  response.status(500).json({
+    status: "Error",
+    message: "This route is not yet defined",
+  });
+};
+
+const updateUser = (request, response) => {
+  response.status(500).json({
+    status: "Error",
+    message: "This route is not yet defined",
+  });
+};
+
+const deleteUser = (request, response) => {
+  response.status(500).json({
+    status: "Error",
+    message: "This route is not yet defined",
+  });
+};
+
+// Routes
 app.get("/api/v1/tours", getAllTours);
 
 app.post("/api/v1/tours", createTour);
@@ -134,6 +171,14 @@ app.delete("/api/v1/tours/:id", deleteTour);
 //   .get(getTourById)
 //   .patch(updateTour)
 //   .delete(deleteTour);
+
+app.route("/api/v1/users").get(getAllUsers).post(createUser);
+
+app
+  .route("/api/v1/users/:id")
+  .get(getUserById)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 const port = 3000;
 app.listen(port, () => {
