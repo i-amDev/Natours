@@ -11,6 +11,11 @@ app.use((request, response, next) => {
   next();
 });
 
+app.use((request, response, next) => {
+  request.requestTime = new Date().toISOString();
+  next();
+});
+
 // app.get("/", (request, response) => {
 //   response
 //     .status(200)
@@ -26,6 +31,7 @@ const tours = JSON.parse(
 );
 
 const getAllTours = (request, response) => {
+  console.log(request.requestTime);
   response.status(200).json({
     status: "success",
     results: tours.length,
