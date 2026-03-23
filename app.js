@@ -6,6 +6,11 @@ const app = express();
 // To use middleware -> which help in getting the request.body object inside the callback function.
 app.use(express.json());
 
+app.use((request, response, next) => {
+  console.log("Hello from the middleware!👋🏻");
+  next();
+});
+
 // app.get("/", (request, response) => {
 //   response
 //     .status(200)
